@@ -1,0 +1,7 @@
+"/.venv/"          
+"/frontend/node_modules/" 
+"code_dashboard.db" 
+"*.pyc"             
+.venv/ 
+repos/ 
+code_dashboard.db 
