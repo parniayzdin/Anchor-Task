@@ -7,6 +7,7 @@ function App() {
   const [cloneUrl, setCloneUrl] = useState('');
   const [loading, setLoading] = useState(false);
 
+  // rename your loader or keep loadAnalyses
   const loadAnalyses = () => {
     fetch('http://127.0.0.1:8000/analyses')
       .then(res => res.json())
@@ -14,26 +15,23 @@ function App() {
       .catch(err => console.error(err));
   };
 
-  useEffect(loadAnalyses, []);
+  // on mount, clear the list then fetch fresh
+  useEffect(() => {
+    fetch("http://127.0.0.1:8000/analyses", { method: "DELETE" })
+      .then(() => loadAnalyses());
+  }, []);
 
   const handleAnalyze = async (e) => {
     e.preventDefault();
-    console.log("Submitted!", fullName, cloneUrl);
-
     if (!fullName || !cloneUrl) return;
     setLoading(true);
     try {
       await fetch('http://127.0.0.1:8000/webhook', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'X-GitHub-Event': 'push'
-        },
-        body: JSON.stringify({
-          repository: { full_name: fullName, clone_url: cloneUrl }
-        })
+        headers: { 'Content-Type': 'application/json', 'X-GitHub-Event': 'push' },
+        body: JSON.stringify({ repository: { full_name: fullName, clone_url: cloneUrl } }),
       });
-      await loadAnalyses();
+      loadAnalyses();
       setFullName('');
       setCloneUrl('');
     } catch (err) {
@@ -52,7 +50,6 @@ function App() {
           <span className="circle green" />
           <span className="editor-title">Code Complexity Dashboard</span>
         </div>
-
         <div className="editor-body">
           <form className="analyze-form" onSubmit={handleAnalyze}>
             <input
@@ -73,14 +70,12 @@ function App() {
               {loading ? 'Analyzing…' : 'Analyze'}
             </button>
           </form>
-
           <pre>{`// Analyzed Repositories
 const complexityResults = [
 ${analyses
     .filter(a => a.complexity_score > 0)
     .map(
-      a =>
-        `  { repoId: ${JSON.stringify(a.repo_full_name)}, complexity: ${a.complexity_score.toFixed(2)} },`
+      a => `  { repoId: ${JSON.stringify(a.repo_full_name)}, complexity: ${a.complexity_score.toFixed(2)} },`
     )
     .join('\n')}
 ];`}</pre>
