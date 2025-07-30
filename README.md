@@ -55,11 +55,17 @@ cd ..
 </details>
 
 ## ⚙️ Configuration
+Your .env file must look like this:
 - GITHUB_CLIENT_ID=YOUR_CLIENT_ID
 - GITHUB_CLIENT_SECRET=YOUR_CLIENT_SECRET
 
 ## ⚠️ Error
 - ModuleNotFoundError → use uvicorn src.main:app, not main:app.
 - High Absorbance / CORS → double‑check .env & allow_origins.
-- Missing Files → git add . && git commit -m "Add files" && git push.
 
+## 🤝 Contributing
+Contributions welcome! Feel free to:
+- Open an issue
+- Submit a pull request
+- Propose new features
+<div align="center"> Made with ❤️ by Parnia Yazdinia </div>
