@@ -13,14 +13,15 @@ Log in with GitHub, enter a repo/username, hit **Analyze**, and watch your proje
 ## ⚡ Quick Setup
 <details>
 <summary>Clone &amp; setup</summary>
-
+📌 Note: The following steps assume you're using the Anaconda Prompt (on Windows) or your system terminal (on macOS/Linux).
+  
 ## Backend
 ```bash
 git clone https://github.com/parniayzdin/code-dashboard.git
-
 cd code-dashboard
 
 # Create & activate Conda environment (Python 3.11)
+python -m pip install --upgrade pip setuptools wheel
 conda create -n code-dashboard python=3.11 -y
 conda activate code-dashboard
 
@@ -43,7 +44,7 @@ npm start
 ```
 ### Run the app
 > **UI (React/Vite)**
-  UI must be available at: http://localhost:5173
+  UI must be available at: http://localhost:3001
 > 
 > **API (FastAPI)**
   Open the interactive docs at: http://localhost:8000/docs
