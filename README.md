@@ -12,46 +12,41 @@ Log in with GitHub, enter a repo/username, hit **Analyze**, and watch your proje
 
 ## ⚡ Quick Setup
 <details>
-<summary>1. Clone &amp; setup</summary>
+<summary>Clone &amp; setup</summary>
 
 ## Backend
 ```bash
 git clone https://github.com/parniayzdin/code-dashboard.git
+
 cd code-dashboard
 
-python -m venv .venv
+# Create & activate Conda environment (Python 3.11)
+conda create -n code-dashboard python=3.11 -y
+conda activate code-dashboard
 
-# macOS/Linux
-source .venv/bin/activate
-
-# Windows PowerShell
-.venv\Scripts\Activate.ps1
-
+# Install Python dependencies
+pip install --upgrade pip setuptools wheel
 pip install -r requirements.txt
 
 # Prepare your .env file
 cp .env.example .env      # macOS / Linux
 copy .env.example .env    # Windows CMD/PowerShell
+
+uvicorn src.main:app --reload
 ```
 ## Frontend
 ```bash
+cd code-dashboard
 cd frontend
 npm install
-cd ..
+npm start
 ```
 ### Run the app
-> Make sure you’re in the **project root** (`code-dashboard/`).
-
-- **API (FastAPI)**  
-  ```bash
-  # From code-dashboard/ (not inside frontend/)
-  uvicorn src.main:app --reload
-  Open the interactive docs at: http://localhost:8000/docs
-- **UI (React/Vite)**
-    ```bash
-  cd frontend
-  npm run dev
+> **UI (React/Vite)**
   UI must be available at: http://localhost:5173
+> 
+> **API (FastAPI)**
+  Open the interactive docs at: http://localhost:8000/docs
 </details>
 
 ## ⚙️ Configuration
