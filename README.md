@@ -21,11 +21,11 @@ git clone https://github.com/parniayzdin/code-dashboard.git
 cd code-dashboard
 
 # Create & activate Conda environment (Python 3.11)
-python -m pip install --upgrade pip setuptools wheel
 conda create -n code-dashboard python=3.11 -y
 conda activate code-dashboard
 
 # Install Python dependencies
+python -m pip install --upgrade pip setuptools wheel
 pip install --upgrade pip setuptools wheel
 pip install -r requirements.txt
 
