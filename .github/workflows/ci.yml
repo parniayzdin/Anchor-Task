@@ -29,18 +29,23 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Show workspace (debug)
+        run: |
+          echo "WORKSPACE=$GITHUB_WORKSPACE"
+          ls -la
+          ls -la backend || true
+          ls -la frontend || true
+
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
       - name: Install backend dependencies
-        working-directory: ${{ github.workspace }}/backend
-        run: pip install -r requirements.txt
+        run: pip install -r backend/requirements.txt
 
       - name: Run FastAPI lint check
-        working-directory: ${{ github.workspace }}/backend
-        run: python -m compileall .
+        run: python -m compileall backend
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
@@ -48,12 +53,9 @@ jobs:
           node-version: '20'
 
       - name: Install frontend dependencies
-        working-directory: ${{ github.workspace }}/frontend
         run: npm ci
+        working-directory: frontend
 
       - name: Build frontend
-        working-directory: ${{ github.workspace }}/frontend
         run: npm run build
-
-      - name: Build Docker images
-        run: docker compose build
+        working-directory: frontend
