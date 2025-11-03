@@ -28,4 +28,4 @@ docker compose up -d
 # backend: http://localhost:8000  (docs: http://localhost:8000/docs)
 # frontend: http://localhost:5173  (after installing in /frontend)
 
-<div align="center"> Made with ❤️ by Parnia Yazdinia </div>
+<p align="center">Made with ❤️ by Parnia Yazdinia</p>
