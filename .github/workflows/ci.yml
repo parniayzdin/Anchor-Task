@@ -29,23 +29,19 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # ---------- BACKEND ----------
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
       - name: Install backend dependencies
-        working-directory: backend
-        run: |
-          pip install -r requirements.txt
+        run: pip install -r requirements.txt
 
       - name: Run FastAPI lint check
         working-directory: backend
         run: |
           python -m compileall .
 
-      # ---------- FRONTEND ----------
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
@@ -59,6 +55,5 @@ jobs:
         working-directory: frontend
         run: npm run build
 
-      # ---------- DOCKER CHECK (Optional) ----------
       - name: Build Docker images
         run: docker compose build
