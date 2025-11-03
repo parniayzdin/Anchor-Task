@@ -35,14 +35,12 @@ jobs:
           python-version: '3.11'
 
       - name: Install backend dependencies
-        working-directory: backend
-        run: |
-          pip install -r requirements.txt
+        working-directory: ${{ github.workspace }}/backend
+        run: pip install -r requirements.txt
 
       - name: Run FastAPI lint check
-        working-directory: backend
-        run: |
-          python -m compileall .
+        working-directory: ${{ github.workspace }}/backend
+        run: python -m compileall .
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
@@ -50,11 +48,11 @@ jobs:
           node-version: '20'
 
       - name: Install frontend dependencies
-        working-directory: frontend
+        working-directory: ${{ github.workspace }}/frontend
         run: npm ci
 
       - name: Build frontend
-        working-directory: frontend
+        working-directory: ${{ github.workspace }}/frontend
         run: npm run build
 
       - name: Build Docker images
